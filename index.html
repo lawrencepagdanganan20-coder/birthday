@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Birthday Special for You ❤️</title>
+  
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #FFFBF7;
+      --pink-soft: #FFB7B2;
+      --pink-accent: #E27396;
+      --pink-deep: #D85A7F;
+      --pink-light: #FFE5E2;
+      --text-dark: #4A3B32;
+      --text-muted: #8C7B70;
+      --white: #FFFFFF;
+      --shadow: 0 10px 30px rgba(226, 115, 150, 0.12);
+      --shadow-hover: 0 15px 35px rgba(226, 115, 150, 0.22);
+      --radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Hearts Animation Background */
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.3;
+      animation: floatUp 8s infinite linear;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(105vh) scale(0.8) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.4; }
+      80% { opacity: 0.4; }
+      100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+
+    /* Container Controls */
+    .app-container {
+      width: 100%;
+      max-width: 550px;
+      padding: 20px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Header Controls */
+    .header-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      margin-bottom: 10px;
+    }
+
+    .audio-btn {
+      background: var(--white);
+      border: 1px solid var(--pink-light);
+      padding: 8px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--pink-accent);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .audio-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Progress Indicator */
+    .progress-wrapper {
+      width: 100%;
+      margin-bottom: 25px;
+      display: none; /* Shown after Page 1 */
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: var(--pink-light);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--pink-soft), var(--pink-accent));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* Card Component */
+    .page-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      animation: fadeIn 0.5s ease forwards;
+      border: 1px solid rgba(255, 229, 226, 0.5);
+    }
+
+    .page-card.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography */
+    h1, h2 {
+      font-family: 'Caveat', cursive;
+      color: var(--pink-deep);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    h1 { font-size: 2.8rem; margin-bottom: 10px; }
+    h2 { font-size: 2.2rem; margin-bottom: 15px; }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .heart-font {
+      font-family: 'Caveat', cursive;
+      color: var(--pink-accent);
+      font-size: 1.5rem;
+    }
+
+    /* Option Grids & Cards */
+    .grid-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .grid-options.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .option-card {
+      background: var(--bg-cream);
+      border: 2px solid transparent;
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .option-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--pink-soft);
+    }
+
+    .option-card.selected {
+      background: var(--pink-light);
+      border-color: var(--pink-accent);
+    }
+
+    .option-icon {
+      font-size: 1.6rem;
+    }
+
+    .option-label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    /* Inputs & Form Elements */
+    .input-group {
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    input[type="text"], input[type="date"], input[type="time"], textarea, select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--pink-light);
+      border-radius: 12px;
+      background: var(--bg-cream);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    input[type="text"]:focus, textarea:focus, select:focus {
+      border-color: var(--pink-accent);
+      background: var(--white);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+
+    /* Buttons */
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink-soft), var(--pink-accent));
+      color: var(--white);
+      box-shadow: 0 4px 15px rgba(226, 115, 150, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(226, 115, 150, 0.4);
+    }
+
+    .btn-secondary {
+      background: var(--bg-cream);
+      color: var(--text-muted);
+      border: 1px solid var(--pink-light);
+    }
+
+    .btn-secondary:hover {
+      background: var(--pink-light);
+      color: var(--text-dark);
+    }
+
+    /* Image Gallery / Memory Section */
+    .memory-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .memory-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: var(--pink-light);
+    }
+
+    .memory-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.5);
+      color: var(--white);
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      text-align: center;
+    }
+
+    /* Countdown Styling */
+    .countdown-box {
+      background: var(--pink-light);
+      border-radius: 16px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .countdown-digits {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 8px;
+    }
+
+    .digit-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .digit-unit .num {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--pink-deep);
+    }
+
+    .digit-unit .label {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Special Interactive Letter Envelope */
+    .envelope-wrapper {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .envelope {
+      width: 180px;
+      height: 120px;
+      background: var(--pink-soft);
+      border-radius: 10px;
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .envelope-text {
+      color: var(--white);
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem;
+      z-index: 2;
+    }
+
+    /* Timeline Section */
+    .timeline {
+      margin: 15px 0;
+      border-left: 2px dashed var(--pink-accent);
+      padding-left: 20px;
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .timeline-item::before {
+      content: '💕';
+      position: absolute;
+      left: -31px;
+      top: -2px;
+      font-size: 0.9rem;
+      background: var(--white);
+      border-radius: 50%;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--pink-deep);
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: var(--text-dark);
+    }
+
+    /* Footer & Admin Link */
+    footer {
+      margin-top: auto;
+      padding: 20px 0 10px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      z-index: 1;
+    }
+
+    .admin-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      opacity: 0.3;
+      margin-top: 5px;
+      display: inline-block;
+      font-size: 0.65rem;
+    }
+
+    .admin-link:hover {
+      opacity: 1;
+    }
+
+    /* Modal / Admin View */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.6);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 25px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .pre-json {
+      background: var(--bg-cream);
+      padding: 12px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      max-height: 250px;
+      overflow-y: auto;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Hearts Container -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <!-- Audio Element (Placeholder royalty-free ambient track) -->
+  <audio id="bgAudio" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="app-container">
+
+    <!-- Header Navigation -->
+    <div class="header-bar">
+      <div class="heart-font">For My Favorite Person ✨</div>
+      <button class="audio-btn" id="audioToggle">
+        <span id="audioIcon">🎵</span> <span id="audioText">Music</span>
+      </button>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="progress-wrapper" id="progressWrapper">
+      <div class="progress-text" id="progressText">Step 1 of 10</div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+    </div>
+
+    <!-- PAGE 1: WELCOME -->
+    <div class="page-card active" id="page1">
+      <h1>Hey, Birthday Girl! ❤️</h1>
+      <p class="subtitle">Your birthday is coming, and I have a little something special planned for you...</p>
+      
+      <!-- Countdown Box -->
+      <div class="countdown-box">
+        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Countdown to Your Birthday 🎂</div>
+        <div class="countdown-digits" id="countdown">
+          <div class="digit-unit"><span class="num" id="d-days">00</span><span class="label">Days</span></div>
+          <div class="digit-unit"><span class="num" id="d-hours">00</span><span class="label">Hours</span></div>
+          <div class="digit-unit"><span class="num" id="d-mins">00</span><span class="label">Mins</span></div>
+          <div class="digit-unit"><span class="num" id="d-secs">00</span><span class="label">Secs</span></div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span style="font-size: 4rem;">🎁</span>
+      </div>
+
+      <button class="btn btn-primary" onclick="goToPage(2)">Open Your Birthday Surprise ✨</button>
+    </div>
+
+    <!-- PAGE 2: PERSONAL MESSAGE & MEMORIES -->
+    <div class="page-card" id="page2">
+      <h2>From My Heart 💌</h2>
+      <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 20px; text-align: center;">
+        Before anything else, I just want you to know how happy I am that I get to celebrate another special day with you. 
+        You deserve a birthday filled with everything that brings you joy, and this time, I want to make it completely unforgettable.
+      </p>
+
+      <div class="memory-gallery">
+        <div class="memory-item">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop" alt="Memory 1">
+          <div class="memory-caption">Us ❤️</div>
+        </div>
+        <div class="memory-item">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop" alt="Memory 2">
+          <div class="memory-caption">Favorite Moments ✨</div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(1)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(3)">Let's plan your birthday 💕</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3: DESTINATION -->
+    <div class="page-card" id="page3">
+      <h2>Where to Go? 📍</h2>
+      <p class="subtitle">Where would you like to go for your birthday? (Select all you like!)</p>
+
+      <div class="grid-options three-col" id="destinationGrid">
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🍽️ Nice Restaurant')">
+          <span class="option-icon">🍽️</span>
+          <span class="option-label">Nice Restaurant</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '☕ Café Date')">
+          <span class="option-icon">☕</span>
+          <span class="option-label">Café Date</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎬 Movie Date')">
+          <span class="option-icon">🎬</span>
+          <span class="option-label">Movie Date</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🌅 Sunset / Beach')">
+          <span class="option-icon">🌅</span>
+          <span class="option-label">Sunset/Beach</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🛍️ Mall & Shopping')">
+          <span class="option-icon">🛍️</span>
+          <span class="option-label">Shopping</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🌳 Park / Outdoors')">
+          <span class="option-icon">🌳</span>
+          <span class="option-label">Park/Outdoors</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎨 Museum / Art')">
+          <span class="option-icon">🎨</span>
+          <span class="option-label">Museum</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎮 Arcade')">
+          <span class="option-icon">🎮</span>
+          <span class="option-label">Arcade</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '✨ Surprise Me!')">
+          <span class="option-icon">✨</span>
+          <span class="option-label">Surprise Me!</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Tell me what you're imagining...</label>
+        <input type="text" id="destinationNote" placeholder="Any specific spot in mind?" oninput="updateData('destinationNote', this.value)">
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(2)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(4)">Continue 💕</button>
+      </div>
+    </div>
+
+    <!-- PAGE 4: BIRTHDAY MOOD -->
+    <div class="page-card" id="page4">
+      <h2>Birthday Vibe 🌟</h2>
+      <p class="subtitle">What kind of birthday mood are you feeling?</p>
+
+      <div class="grid-options" id="moodGrid">
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '💕 Romantic & Relaxing')">
+          <span class="option-icon">💕</span>
+          <span class="option-label">Romantic & Relaxing</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '😂 Fun & Chaotic')">
+          <span class="option-icon">😂</span>
+          <span class="option-label">Fun & Chaotic</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🍽️ Food Trip')">
+          <span class="option-icon">🍽️</span>
+          <span class="option-label">Food Trip</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🧸 Cozy & Quiet')">
+          <span class="option-icon">🧸</span>
+          <span class="option-label">Cozy & Quiet</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '📸 Photos & Memories')">
+          <span class="option-icon">📸</span>
+          <span class="option-label">Photos & Memories</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🗺️ Adventure')">
+          <span class="option-icon">🗺️</span>
+          <span class="option-label">Adventure</span>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(3)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(5)">Next 🎁</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5: GIFTS -->
+    <div class="page-card" id="page5">
+      <h2>Gift Wishlist 🎁</h2>
+      <p class="subtitle">If you could choose your birthday gift, what would make you smile?</p>
+
+      <div class="grid-options three-col">
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💐 Flowers')">
+          <span class="option-icon">💐</span><span class="option-label">Flowers</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '🧸 Stuffed Toy')">
+          <span class="option-icon">🧸</span><span class="option-label">Stuffed Toy</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💎 Jewelry')">
+          <span class="option-icon">💎</span><span class="option-label">Jewelry</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👗 Clothes')">
+          <span class="option-icon">👗</span><span class="option-label">Clothes</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👟 Shoes')">
+          <span class="option-icon">👟</span><span class="option-label">Shoes</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👜 Bag')">
+          <span class="option-icon">👜</span><span class="option-label">Bag</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💄 Makeup / Beauty')">
+          <span class="option-icon">💄</span><span class="option-label">Beauty</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '🍫 Chocolates')">
+          <span class="option-icon">🍫</span><span class="option-label">Chocolates</span>
+        </div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💌 Something Handmade')">
+          <span class="option-icon">💌</span><span class="option-label">Handmade</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Something else in mind?</label>
+        <input type="text" placeholder="Tell me what you wish for..." oninput="updateData('customGift', this.value)">
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(4)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(6)">Food Choices 😋</button>
+      </div>
+    </div>
+
+    <!-- PAGE 6: FOOD & DESSERT -->
+    <div class="page-card" id="page6">
+      <h2>Food & Dessert 😋</h2>
+      <p class="subtitle">Of course, we can't forget the best part! What are you craving?</p>
+
+      <div class="input-group">
+        <label class="input-label">Main Cuisine / Food Preference:</label>
+        <div class="grid-options three-col">
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍣 Japanese')"><span class="option-icon">🍣</span><span class="option-label">Japanese</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍕 Italian/Pizza')"><span class="option-icon">🍕</span><span class="option-label">Italian</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🥩 Steak/BBQ')"><span class="option-icon">🥩</span><span class="option-label">Steak</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍜 Korean')"><span class="option-icon">🍜</span><span class="option-label">Korean</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍗 Filipino')"><span class="option-icon">🍗</span><span class="option-label">Filipino</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍱 Anything!')"><span class="option-icon">🍱</span><span class="option-label">Anything</span></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Favorite Dessert:</label>
+        <div class="grid-options three-col">
+          <div class="option-card" onclick="setSingleSelect(this, 'dessert', '🎂 Cake')"><span class="option-icon">🎂</span><span class="option-label">Cake</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'dessert', '🍦 Ice Cream')"><span class="option-icon">🍦</span><span class="option-label">Ice Cream</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'dessert', '🍰 Cheesecake')"><span class="option-icon">🍰</span><span class="option-label">Cheesecake</span></div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(5)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(7)">Activities 🎉</button>
+      </div>
+    </div>
+
+    <!-- PAGE 7: ACTIVITIES -->
+    <div class="page-card" id="page7">
+      <h2>Birthday Activities 🎬</h2>
+      <p class="subtitle">After eating, what should we do?</p>
+
+      <div class="grid-options two-col">
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎬 Watch a Movie')"><span class="option-icon">🎬</span><span class="option-label">Watch a Movie</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '📸 Take Photobooth Pictures')"><span class="option-icon">📸</span><span class="option-label">Photobooth / Pictures</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🚶 Relaxing Walk')"><span class="option-icon">🚶</span><span class="option-label">Relaxing Walk</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎤 Karaoke')"><span class="option-icon">🎤</span><span class="option-label">Karaoke</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎨 Creative Workshop')"><span class="option-icon">🎨</span><span class="option-label">Creative / Crafting</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '❤️ Just spend time together')"><span class="option-icon">❤️</span><span class="option-label">Just Spend Time Together</span></div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(6)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(8)">Preferences 💗</button>
+      </div>
+    </div>
+
+    <!-- PAGE 8: IMPORTANT PREFERENCES -->
+    <div class="page-card" id="page8">
+      <h2>Help Me Plan 💗</h2>
+      <p class="subtitle">A few tiny details so I can make everything perfect for you.</p>
+
+      <div class="input-group">
+        <label class="input-label">Preferred Time of Day:</label>
+        <div class="grid-options three-col">
+          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Morning')"><span class="option-label">Morning ☀️</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Afternoon')"><span class="option-label">Afternoon 🌤️</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Evening')"><span class="option-label">Evening 🌙</span></div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Anything you DON'T want to do?</label>
+        <input type="text" placeholder="e.g. Too much walking, crowded places..." oninput="updateData('dontWant', this.value)">
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Anything you REALLY want to do?</label>
+        <input type="text" placeholder="e.g. Get a specific drink, take sunset photos..." oninput="updateData('reallyWant', this.value)">
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(7)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(9)">Date Details 📅</button>
+      </div>
+    </div>
+
+    <!-- PAGE 9: DATE DETAILS -->
+    <div class="page-card" id="page9">
+      <h2>The Date Details 📅</h2>
+      <p class="subtitle">Select your preferred date & time for our celebration.</p>
+
+      <div class="input-group">
+        <label class="input-label">Preferred Date:</label>
+        <input type="date" id="dateInput" onchange="updateData('preferredDate', this.value)">
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Preferred Start Time:</label>
+        <input type="time" id="timeInput" onchange="updateData('preferredTime', this.value)">
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Meeting Place preference:</label>
+        <input type="text" placeholder="e.g. Pick me up at home / Meet at venue" oninput="updateData('meetingPlace', this.value)">
+      </div>
+
+      <div style="margin: 15px 0; text-align: center;">
+        <p class="input-label" style="font-size: 1rem; margin-bottom: 10px;">Are you ready to spend your birthday with me? ❤️</p>
+        <div class="grid-options" style="grid-template-columns: 1fr;">
+          <div class="option-card selected" onclick="setSingleSelect(this, 'readyChoice', 'YESSS! 🥰')">
+            <span class="option-label">YESSS! 🥰</span>
+          </div>
+          <div class="option-card" onclick="setSingleSelect(this, 'readyChoice', 'Of course! ❤️')">
+            <span class="option-label">Of course! ❤️</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-secondary" onclick="goToPage(8)">Back</button>
+        <button class="btn btn-primary" onclick="submitForm()">Submit Wishes 💌</button>
+      </div>
+    </div>
+
+    <!-- PAGE 10: FINAL SURPRISE & INVITATION -->
+    <div class="page-card" id="page10">
+      <h2>Plans Received! 💌</h2>
+      <p class="subtitle">Your birthday preferences are officially in my hands.</p>
+
+      <div style="text-align: center; margin: 15px 0;">
+        <p style="font-size: 1rem; color: var(--text-dark);">Now it's my turn to make it happen. ❤️</p>
+      </div>
+
+      <div class="envelope-wrapper">
+        <div class="envelope" onclick="revealFinalQuestion()">
+          <div class="envelope-text">Click to Open 💌</div>
+        </div>
+      </div>
+
+      <div id="finalQuestionArea" style="display: none; text-align: center; margin-top: 20px; animation: fadeIn 0.5s ease forward;">
+        <h1 style="font-size: 2.2rem; color: var(--pink-deep); margin-bottom: 15px;">Will you go on a birthday date with me? ❤️</h1>
+        
+        <div class="button-group" style="flex-direction: column;">
+          <button class="btn btn-primary" style="font-size: 1.1rem;" onclick="acceptDate('YES, LET\'S GO! 💕')">YES, LET'S GO! 💕</button>
+          <button class="btn btn-secondary" style="border-color: var(--pink-soft); color: var(--pink-deep);" onclick="acceptDate('Of course! 🥰')">Of course! 🥰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 11: SUMMARY & TIMELINE -->
+    <div class="page-card" id="page11">
+      <h1>IT'S A DATE! ❤️</h1>
+      <p class="subtitle">Happy Birthday, my love. I can't wait to make this day special for you.</p>
+
+      <div style="background: var(--bg-cream); border-radius: 16px; padding: 18px; margin-bottom: 20px;">
+        <h3 style="color: var(--pink-deep); text-align: center; margin-bottom: 12px; font-family: 'Caveat', cursive; font-size: 1.6rem;">Your Birthday Wishlist 💗</h3>
+        <div id="summaryContent" style="font-size: 0.85rem; line-height: 1.8; color: var(--text-dark);">
+          <!-- Dynamically Populated -->
+        </div>
+      </div>
+
+      <h3 style="color: var(--pink-deep); text-align: center; font-family: 'Caveat', cursive; font-size: 1.6rem; margin-bottom: 10px;">Proposed Birthday Timeline 🕒</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-title">Meet & Pick Up</div>
+          <div class="timeline-desc">Starting our special day with big smiles & birthday hugs</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Main Birthday Feast</div>
+          <div class="timeline-desc">Enjoying your favorite dishes together</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Fun & Activities</div>
+          <div class="timeline-desc">Doing whatever makes your heart happiest</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-title">Surprise & Dessert Time</div>
+          <div class="timeline-desc">Blowing out candles & special gifts</div>
+        </div>
+      </div>
+
+      <p style="text-align: center; font-size: 0.9rem; color: var(--pink-accent); font-weight: 600; margin-top: 15px;">
+        Don't worry, I'll take care of all the rest. 😉
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      Made especially for you with ❤️
+      <br>
+      <a href="#" class="admin-link" onclick="openAdminModal(event)">Admin View</a>
+    </footer>
+
+  </div>
+
+  <!-- ADMIN DASHBOARD MODAL -->
+  <div class="modal" id="adminModal">
+    <div class="modal-content">
+      <h2 style="text-align: left; margin-bottom: 10px;">Admin Dashboard 📊</h2>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">View submitted birthday preferences here.</p>
+      
+      <div id="adminDataArea">
+        <p style="font-size: 0.85rem; color: var(--text-muted);">No responses recorded yet.</p>
+      </div>
+
+      <div class="pre-json" id="jsonDisplay">{}</div>
+
+      <div class="button-group" style="margin-top: 15px;">
+        <button class="btn btn-secondary" onclick="exportData('csv')">Export CSV</button>
+        <button class="btn btn-secondary" onclick="exportData('json')">Export JSON</button>
+        <button class="btn btn-primary" onclick="closeAdminModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Global Application State */
+    const TOTAL_PAGES = 10;
+    let currentPage = 1;
+
+    let birthdayData = {
+      destination: [],
+      destinationNote: '',
+      mood: [],
+      gifts: [],
+      customGift: '',
+      food: '',
+      dessert: '',
+      activity: [],
+      timeOfDay: '',
+      dontWant: '',
+      reallyWant: '',
+      preferredDate: '',
+      preferredTime: '',
+      meetingPlace: '',
+      readyChoice: 'YESSS! 🥰',
+      acceptedInvitation: '',
+      timestamp: null
+    };
+
+    /* Background Heart Generation */
+    function initHearts() {
+      const container = document.getElementById('bgHearts');
+      const heartIcons = ['❤️', '💖', '💕', '🌸', '✨'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (6 + Math.random() * 6) + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(heart);
+      }
+    }
+
+    /* Audio Setup */
+    const bgAudio = document.getElementById('bgAudio');
+    const audioToggle = document.getElementById('audioToggle');
+    let isPlaying = false;
+
+    audioToggle.addEventListener('click', () => {
+      if (isPlaying) {
+        bgAudio.pause();
+        document.getElementById('audioIcon').innerText = '🎵';
+        document.getElementById('audioText').innerText = 'Music';
+      } else {
+        bgAudio.play().catch(() => {});
+        document.getElementById('audioIcon').innerText = '🔊';
+        document.getElementById('audioText').innerText = 'Playing';
+      }
+      isPlaying = !isPlaying;
+    });
+
+    /* Countdown Timer (Set to 30 days from now by default, edit date as needed) */
+    function initCountdown() {
+      const targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + 14); // Default: 2 weeks out
+
+      function update() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) return;
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / 1000 / 60) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('d-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('d-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('d-mins').innerText = String(mins).padStart(2, '0');
+        document.getElementById('d-secs').innerText = String(secs).padStart(2, '0');
+      }
+
+      update();
+      setInterval(update, 1000);
+    }
+
+    /* Navigation Controller */
+    function goToPage(pageNum) {
+      // Hide all cards
+      document.querySelectorAll('.page-card').forEach(card => card.classList.remove('active'));
+
+      // Show target card
+      const targetCard = document.getElementById(`page${pageNum}`);
+      if (targetCard) targetCard.classList.add('active');
+
+      currentPage = pageNum;
+
+      // Progress bar UI
+      const progressWrapper = document.getElementById('progressWrapper');
+      if (pageNum > 1 && pageNum <= TOTAL_PAGES) {
+        progressWrapper.style.display = 'block';
+        document.getElementById('progressText').innerText = `Step ${pageNum - 1} of ${TOTAL_PAGES - 1}`;
+        const fillPercent = ((pageNum - 1) / (TOTAL_PAGES - 1)) * 100;
+        document.getElementById('progressBarFill').style.width = `${fillPercent}%`;
+      } else {
+        progressWrapper.style.display = 'none';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* Selection Logic */
+    function toggleMultiSelect(element, key, value) {
+      element.classList.toggle('selected');
+      if (!Array.isArray(birthdayData[key])) {
+        birthdayData[key] = [];
+      }
+      const index = birthdayData[key].indexOf(value);
+      if (index > -1) {
+        birthdayData[key].splice(index, 1);
+      } else {
+        birthdayData[key].push(value);
+      }
+      saveToLocalStorage();
+    }
+
+    function setSingleSelect(element, key, value) {
+      // Unselect siblings
+      const parent = element.parentElement;
+      parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+
+      birthdayData[key] = value;
+      saveToLocalStorage();
+    }
+
+    function updateData(key, value) {
+      birthdayData[key] = value;
+      saveToLocalStorage();
+    }
+
+    /* LocalStorage Handler */
+    function saveToLocalStorage() {
+      localStorage.setItem('birthday_wishlist_data', JSON.stringify(birthdayData));
+    }
+
+    function loadFromLocalStorage() {
+      const saved = localStorage.getItem('birthday_wishlist_data');
+      if (saved) {
+        try {
+          birthdayData = JSON.parse(saved);
+        } catch (e) {
+          console.error("Could not load stored data", e);
+        }
+      }
+    }
+
+    /* Form Submission & Final Steps */
+    function submitForm() {
+      birthdayData.timestamp = new Date().toLocaleString();
+      saveToLocalStorage();
+      goToPage(10);
+    }
+
+    function revealFinalQuestion() {
+      document.querySelector('.envelope').style.transform = 'scale(0.9)';
+      document.querySelector('.envelope').style.opacity = '0.5';
+      document.getElementById('finalQuestionArea').style.display = 'block';
+      
+      // Fire subtle confetti
+      confetti({
+        particleCount: 40,
+        spread: 60,
+        origin: { y: 0.7 }
+      });
+    }
+
+    function acceptDate(choiceText) {
+      birthdayData.acceptedInvitation = choiceText;
+      saveToLocalStorage();
+
+      // Big Celebratory Confetti
+      confetti({
+        particleCount: 120,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+
+      renderSummary();
+      goToPage(11);
+    }
+
+    /* Dynamic Summary Builder */
+    function renderSummary() {
+      const summaryBox = document.getElementById('summaryContent');
+      summaryBox.innerHTML = `
+        <p><strong>📍 Destination:</strong> ${birthdayData.destination.join(', ') || 'Surprise / Open'}</p>
+        <p><strong>🌟 Mood:</strong> ${birthdayData.mood.join(', ') || 'Not specified'}</p>
+        <p><strong>🍽️ Craving:</strong> ${birthdayData.food || 'Any'} | Dessert: ${birthdayData.dessert || 'Any'}</p>
+        <p><strong>🎁 Wishlist:</strong> ${birthdayData.gifts.join(', ') || 'Surprise'} ${birthdayData.customGift ? `(${birthdayData.customGift})` : ''}</p>
+        <p><strong>🎬 Activity:</strong> ${birthdayData.activity.join(', ') || 'Just spend time together'}</p>
+        <p><strong>📅 Preferred Date:</strong> ${birthdayData.preferredDate || 'Flexible'} @ ${birthdayData.preferredTime || 'Flexible'}</p>
+      `;
+    }
+
+    /* Admin View & Export Utilities */
+    function openAdminModal(e) {
+      e.preventDefault();
+      document.getElementById('adminModal').style.display = 'flex';
+      
+      const adminDataArea = document.getElementById('adminDataArea');
+      const jsonDisplay = document.getElementById('jsonDisplay');
+
+      jsonDisplay.innerText = JSON.stringify(birthdayData, null, 2);
+
+      if (birthdayData.timestamp) {
+        adminDataArea.innerHTML = `
+          <div style="font-size: 0.85rem; line-height: 1.6;">
+            <p><strong>Submitted:</strong> ${birthdayData.timestamp}</p>
+            <p><strong>Accepted:</strong> ${birthdayData.acceptedInvitation || 'Pending'}</p>
+            <p><strong>Date Chosen:</strong> ${birthdayData.preferredDate} at ${birthdayData.preferredTime}</p>
+            <p><strong>Meeting Spot:</strong> ${birthdayData.meetingPlace || 'N/A'}</p>
+          </div>
+        `;
+      }
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function exportData(format) {
+      let dataStr = "";
+      let filename = "";
+
+      if (format === 'json') {
+        dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(birthdayData, null, 2));
+        filename = "birthday_wishes.json";
+      } else {
+        // CSV Format
+        let csvContent = "Field,Value\n";
+        for (let key in birthdayData) {
+          let val = Array.isArray(birthdayData[key]) ? birthdayData[key].join("; ") : birthdayData[key];
+          csvContent += `"${key}","${String(val).replace(/"/g, '""')}"\n`;
+        }
+        dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
+        filename = "birthday_wishes.csv";
+      }
+
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", filename);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    /* Keyboard Shortcut for Admin Dashboard (Ctrl/Cmd + Shift + A) */
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        openAdminModal(e);
+      }
+    });
+
+    /* Initialization */
+    window.addEventListener('DOMContentLoaded', () => {
+      initHearts();
+      initCountdown();
+      loadFromLocalStorage();
+    });
+  </script>
+</body>
+</html>
