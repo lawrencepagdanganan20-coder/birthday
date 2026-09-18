@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Birthday Special for You ❤️</title>
+  <title>For Allie ❤️</title>
   
   <!-- Canvas Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -75,7 +75,6 @@
       100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
     }
 
-    /* Container Controls */
     .app-container {
       width: 100%;
       max-width: 550px;
@@ -87,7 +86,6 @@
       min-height: 100vh;
     }
 
-    /* Header Controls */
     .header-bar {
       width: 100%;
       display: flex;
@@ -112,16 +110,10 @@
       transition: var(--transition);
     }
 
-    .audio-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Progress Indicator */
     .progress-wrapper {
       width: 100%;
       margin-bottom: 25px;
-      display: none; /* Shown after Page 1 */
+      display: none;
     }
 
     .progress-text {
@@ -148,7 +140,6 @@
       transition: width 0.4s ease;
     }
 
-    /* Card Component */
     .page-card {
       background: var(--white);
       border-radius: var(--radius);
@@ -170,7 +161,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Typography */
     h1, h2 {
       font-family: 'Caveat', cursive;
       color: var(--pink-deep);
@@ -193,6 +183,98 @@
       font-family: 'Caveat', cursive;
       color: var(--pink-accent);
       font-size: 1.5rem;
+    }
+
+    /* 2x2 Memory Gallery Styling */
+    .memory-gallery-2x2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .memory-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      background: var(--pink-light);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .memory-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .memory-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      color: var(--white);
+      font-size: 0.75rem;
+      padding: 8px 6px 4px;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Alternating Date Destinations Layout */
+    .destination-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      background: var(--bg-cream);
+      padding: 12px;
+      border-radius: 16px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .destination-row.selected {
+      border-color: var(--pink-accent);
+      background: var(--pink-light);
+    }
+
+    .destination-img {
+      width: 110px;
+      height: 90px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .destination-check-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .custom-checkbox {
+      width: 22px;
+      height: 22px;
+      border: 2px solid var(--pink-accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .destination-row.selected .custom-checkbox::after {
+      content: '✓';
+      color: var(--pink-deep);
+      font-weight: bold;
+      font-size: 14px;
     }
 
     /* Option Grids & Cards */
@@ -223,25 +305,13 @@
       user-select: none;
     }
 
-    .option-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--pink-soft);
-    }
-
     .option-card.selected {
       background: var(--pink-light);
       border-color: var(--pink-accent);
     }
 
-    .option-icon {
-      font-size: 1.6rem;
-    }
-
-    .option-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-dark);
-    }
+    .option-icon { font-size: 1.6rem; }
+    .option-label { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
 
     /* Inputs & Form Elements */
     .input-group {
@@ -257,7 +327,7 @@
       color: var(--text-dark);
     }
 
-    input[type="text"], input[type="date"], input[type="time"], textarea, select {
+    input[type="text"], input[type="date"], input[type="time"], textarea {
       width: 100%;
       padding: 12px 16px;
       border: 1.5px solid var(--pink-light);
@@ -269,14 +339,9 @@
       transition: var(--transition);
     }
 
-    input[type="text"]:focus, textarea:focus, select:focus {
+    input[type="text"]:focus, textarea:focus {
       border-color: var(--pink-accent);
       background: var(--white);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 70px;
     }
 
     /* Buttons */
@@ -300,7 +365,6 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      text-decoration: none;
     }
 
     .btn-primary {
@@ -309,54 +373,10 @@
       box-shadow: 0 4px 15px rgba(226, 115, 150, 0.3);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(226, 115, 150, 0.4);
-    }
-
     .btn-secondary {
       background: var(--bg-cream);
       color: var(--text-muted);
       border: 1px solid var(--pink-light);
-    }
-
-    .btn-secondary:hover {
-      background: var(--pink-light);
-      color: var(--text-dark);
-    }
-
-    /* Image Gallery / Memory Section */
-    .memory-gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .memory-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 1;
-      background: var(--pink-light);
-    }
-
-    .memory-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .memory-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0,0,0,0.5);
-      color: var(--white);
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      text-align: center;
     }
 
     /* Countdown Styling */
@@ -393,7 +413,6 @@
       text-transform: uppercase;
     }
 
-    /* Special Interactive Letter Envelope */
     .envelope-wrapper {
       margin: 20px 0;
       display: flex;
@@ -414,18 +433,12 @@
       transition: var(--transition);
     }
 
-    .envelope:hover {
-      transform: scale(1.05);
-    }
-
     .envelope-text {
       color: var(--white);
       font-family: 'Caveat', cursive;
       font-size: 1.4rem;
-      z-index: 2;
     }
 
-    /* Timeline Section */
     .timeline {
       margin: 15px 0;
       border-left: 2px dashed var(--pink-accent);
@@ -433,11 +446,7 @@
       margin-left: 10px;
     }
 
-    .timeline-item {
-      position: relative;
-      margin-bottom: 15px;
-    }
-
+    .timeline-item { position: relative; margin-bottom: 15px; }
     .timeline-item::before {
       content: '💕';
       position: absolute;
@@ -448,18 +457,9 @@
       border-radius: 50%;
     }
 
-    .timeline-title {
-      font-weight: 600;
-      font-size: 0.85rem;
-      color: var(--pink-deep);
-    }
+    .timeline-title { font-weight: 600; font-size: 0.85rem; color: var(--pink-deep); }
+    .timeline-desc { font-size: 0.8rem; color: var(--text-dark); }
 
-    .timeline-desc {
-      font-size: 0.8rem;
-      color: var(--text-dark);
-    }
-
-    /* Footer & Admin Link */
     footer {
       margin-top: auto;
       padding: 20px 0 10px;
@@ -478,11 +478,6 @@
       font-size: 0.65rem;
     }
 
-    .admin-link:hover {
-      opacity: 1;
-    }
-
-    /* Modal / Admin View */
     .modal {
       position: fixed;
       top: 0;
@@ -518,23 +513,31 @@
       overflow-y: auto;
       margin: 10px 0;
     }
+
+    .love-note-box {
+      background: var(--pink-light);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      margin: 15px 0;
+      border: 1px dashed var(--pink-accent);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Floating Hearts Container -->
   <div class="bg-hearts" id="bgHearts"></div>
 
-  <!-- Audio Element (Placeholder royalty-free ambient track) -->
+  <!-- Audio: The 1975 - About You (Catbox hosted MP3 link) -->
   <audio id="bgAudio" loop preload="auto">
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=soft-piano-100-bpm-121529.mp3" type="audio/mpeg">
+    <source src="https://files.catbox.moe/w204u7.mp3" type="audio/mpeg">
   </audio>
 
   <div class="app-container">
 
     <!-- Header Navigation -->
     <div class="header-bar">
-      <div class="heart-font">For My Favorite Person ✨</div>
+      <div class="heart-font">For my favorite girl, Allie ✨</div>
       <button class="audio-btn" id="audioToggle">
         <span id="audioIcon">🎵</span> <span id="audioText">Music</span>
       </button>
@@ -542,7 +545,7 @@
 
     <!-- Progress Indicator -->
     <div class="progress-wrapper" id="progressWrapper">
-      <div class="progress-text" id="progressText">Step 1 of 10</div>
+      <div class="progress-text" id="progressText">Step 1 of 8</div>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progressBarFill"></div>
       </div>
@@ -553,11 +556,11 @@
       <h1>Hey, Birthday Girl! ❤️</h1>
       <p class="subtitle">Your birthday is coming, and I have a little something special planned for you...</p>
       
-      <!-- Countdown Box -->
+      <!-- Countdown Box (Set to 27 Days) -->
       <div class="countdown-box">
         <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Countdown to Your Birthday 🎂</div>
         <div class="countdown-digits" id="countdown">
-          <div class="digit-unit"><span class="num" id="d-days">00</span><span class="label">Days</span></div>
+          <div class="digit-unit"><span class="num" id="d-days">27</span><span class="label">Days</span></div>
           <div class="digit-unit"><span class="num" id="d-hours">00</span><span class="label">Hours</span></div>
           <div class="digit-unit"><span class="num" id="d-mins">00</span><span class="label">Mins</span></div>
           <div class="digit-unit"><span class="num" id="d-secs">00</span><span class="label">Secs</span></div>
@@ -571,7 +574,7 @@
       <button class="btn btn-primary" onclick="goToPage(2)">Open Your Birthday Surprise ✨</button>
     </div>
 
-    <!-- PAGE 2: PERSONAL MESSAGE & MEMORIES -->
+    <!-- PAGE 2: PERSONAL MESSAGE & 2x2 PHOTO GRID -->
     <div class="page-card" id="page2">
       <h2>From My Heart 💌</h2>
       <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 20px; text-align: center;">
@@ -579,14 +582,23 @@
         You deserve a birthday filled with everything that brings you joy, and this time, I want to make it completely unforgettable.
       </p>
 
-      <div class="memory-gallery">
+      <!-- 2x2 Photo Grid -->
+      <div class="memory-gallery-2x2">
         <div class="memory-item">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop" alt="Memory 1">
-          <div class="memory-caption">Us ❤️</div>
+          <img src="photo1.jpg" alt="Allie 1">
+          <div class="memory-caption">My Favorite ❤️</div>
         </div>
         <div class="memory-item">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400&auto=format&fit=crop" alt="Memory 2">
-          <div class="memory-caption">Favorite Moments ✨</div>
+          <img src="photo2.jpg" alt="Allie 2">
+          <div class="memory-caption">Pretty Girl ✨</div>
+        </div>
+        <div class="memory-item">
+          <img src="photo3.jpg" alt="Allie 3">
+          <div class="memory-caption">Cutest Smile 💕</div>
+        </div>
+        <div class="memory-item">
+          <img src="photo4.jpg" alt="Allie 4">
+          <div class="memory-caption">Birthday Girl 👑</div>
         </div>
       </div>
 
@@ -596,53 +608,32 @@
       </div>
     </div>
 
-    <!-- PAGE 3: DESTINATION -->
+    <!-- PAGE 3: DESTINATION (Alternating Layout) -->
     <div class="page-card" id="page3">
       <h2>Where to Go? 📍</h2>
-      <p class="subtitle">Where would you like to go for your birthday? (Select all you like!)</p>
+      <p class="subtitle">Where would you like to go for your birthday?</p>
 
-      <div class="grid-options three-col" id="destinationGrid">
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🍽️ Nice Restaurant')">
-          <span class="option-icon">🍽️</span>
-          <span class="option-label">Nice Restaurant</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '☕ Café Date')">
-          <span class="option-icon">☕</span>
-          <span class="option-label">Café Date</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎬 Movie Date')">
-          <span class="option-icon">🎬</span>
-          <span class="option-label">Movie Date</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🌅 Sunset / Beach')">
-          <span class="option-icon">🌅</span>
-          <span class="option-label">Sunset/Beach</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🛍️ Mall & Shopping')">
-          <span class="option-icon">🛍️</span>
-          <span class="option-label">Shopping</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🌳 Park / Outdoors')">
-          <span class="option-icon">🌳</span>
-          <span class="option-label">Park/Outdoors</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎨 Museum / Art')">
-          <span class="option-icon">🎨</span>
-          <span class="option-label">Museum</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '🎮 Arcade')">
-          <span class="option-icon">🎮</span>
-          <span class="option-label">Arcade</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'destination', '✨ Surprise Me!')">
-          <span class="option-icon">✨</span>
-          <span class="option-label">Surprise Me!</span>
+      <!-- Option 1: Left Image, Right Checkbox -->
+      <div class="destination-row" onclick="toggleDestinationRow(this, 'Mall Date (Venice Grand Canal)')">
+        <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=400&auto=format&fit=crop" class="destination-img" alt="Venice Canal">
+        <div class="destination-check-wrap">
+          <div class="custom-checkbox"></div>
+          <span>Mall Date (Venice Grand Canal)</span>
         </div>
       </div>
 
-      <div class="input-group">
+      <!-- Option 2: Left Checkbox, Right Image -->
+      <div class="destination-row" onclick="toggleDestinationRow(this, 'Rooftop Dinner Date')">
+        <div class="destination-check-wrap">
+          <span>Rooftop Dinner Date</span>
+          <div class="custom-checkbox"></div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&auto=format&fit=crop" class="destination-img" alt="Rooftop Dinner">
+      </div>
+
+      <div class="input-group" style="margin-top: 15px;">
         <label class="input-label">Tell me what you're imagining...</label>
-        <input type="text" id="destinationNote" placeholder="Any specific spot in mind?" oninput="updateData('destinationNote', this.value)">
+        <input type="text" placeholder="Any specific spot/place in mind?" oninput="updateData('destinationNote', this.value)">
       </div>
 
       <div class="button-group">
@@ -651,46 +642,8 @@
       </div>
     </div>
 
-    <!-- PAGE 4: BIRTHDAY MOOD -->
+    <!-- PAGE 4: GIFTS -->
     <div class="page-card" id="page4">
-      <h2>Birthday Vibe 🌟</h2>
-      <p class="subtitle">What kind of birthday mood are you feeling?</p>
-
-      <div class="grid-options" id="moodGrid">
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '💕 Romantic & Relaxing')">
-          <span class="option-icon">💕</span>
-          <span class="option-label">Romantic & Relaxing</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '😂 Fun & Chaotic')">
-          <span class="option-icon">😂</span>
-          <span class="option-label">Fun & Chaotic</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🍽️ Food Trip')">
-          <span class="option-icon">🍽️</span>
-          <span class="option-label">Food Trip</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🧸 Cozy & Quiet')">
-          <span class="option-icon">🧸</span>
-          <span class="option-label">Cozy & Quiet</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '📸 Photos & Memories')">
-          <span class="option-icon">📸</span>
-          <span class="option-label">Photos & Memories</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'mood', '🗺️ Adventure')">
-          <span class="option-icon">🗺️</span>
-          <span class="option-label">Adventure</span>
-        </div>
-      </div>
-
-      <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(3)">Back</button>
-        <button class="btn btn-primary" onclick="goToPage(5)">Next 🎁</button>
-      </div>
-    </div>
-
-    <!-- PAGE 5: GIFTS -->
-    <div class="page-card" id="page5">
       <h2>Gift Wishlist 🎁</h2>
       <p class="subtitle">If you could choose your birthday gift, what would make you smile?</p>
 
@@ -713,15 +666,6 @@
         <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👜 Bag')">
           <span class="option-icon">👜</span><span class="option-label">Bag</span>
         </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💄 Makeup / Beauty')">
-          <span class="option-icon">💄</span><span class="option-label">Beauty</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '🍫 Chocolates')">
-          <span class="option-icon">🍫</span><span class="option-label">Chocolates</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💌 Something Handmade')">
-          <span class="option-icon">💌</span><span class="option-label">Handmade</span>
-        </div>
       </div>
 
       <div class="input-group">
@@ -730,13 +674,13 @@
       </div>
 
       <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(4)">Back</button>
-        <button class="btn btn-primary" onclick="goToPage(6)">Food Choices 😋</button>
+        <button class="btn btn-secondary" onclick="goToPage(3)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(5)">Food Choices 😋</button>
       </div>
     </div>
 
-    <!-- PAGE 6: FOOD & DESSERT -->
-    <div class="page-card" id="page6">
+    <!-- PAGE 5: FOOD & DESSERT (With Food Wishlist Input) -->
+    <div class="page-card" id="page5">
       <h2>Food & Dessert 😋</h2>
       <p class="subtitle">Of course, we can't forget the best part! What are you craving?</p>
 
@@ -744,11 +688,11 @@
         <label class="input-label">Main Cuisine / Food Preference:</label>
         <div class="grid-options three-col">
           <div class="option-card" onclick="setSingleSelect(this, 'food', '🍣 Japanese')"><span class="option-icon">🍣</span><span class="option-label">Japanese</span></div>
-          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍕 Italian/Pizza')"><span class="option-icon">🍕</span><span class="option-label">Italian</span></div>
-          <div class="option-card" onclick="setSingleSelect(this, 'food', '🥩 Steak/BBQ')"><span class="option-icon">🥩</span><span class="option-label">Steak</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍕 Italian')"><span class="option-icon">🍕</span><span class="option-label">Italian</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🥩 Steak')"><span class="option-icon">🥩</span><span class="option-label">Steak</span></div>
           <div class="option-card" onclick="setSingleSelect(this, 'food', '🍜 Korean')"><span class="option-icon">🍜</span><span class="option-label">Korean</span></div>
           <div class="option-card" onclick="setSingleSelect(this, 'food', '🍗 Filipino')"><span class="option-icon">🍗</span><span class="option-label">Filipino</span></div>
-          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍱 Anything!')"><span class="option-icon">🍱</span><span class="option-label">Anything</span></div>
+          <div class="option-card" onclick="setSingleSelect(this, 'food', '🍱 Anything')"><span class="option-icon">🍱</span><span class="option-label">Anything</span></div>
         </div>
       </div>
 
@@ -761,64 +705,38 @@
         </div>
       </div>
 
+      <!-- Specific Food Listing Input Box -->
+      <div class="input-group">
+        <label class="input-label">Specific foods or dishes you're craving:</label>
+        <input type="text" placeholder="e.g. Samgyupsal, Matcha Ice Cream, Ramen, Pasta..." oninput="updateData('specificFoods', this.value)">
+      </div>
+
       <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(5)">Back</button>
-        <button class="btn btn-primary" onclick="goToPage(7)">Activities 🎉</button>
+        <button class="btn btn-secondary" onclick="goToPage(4)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(6)">Activities 🎉</button>
       </div>
     </div>
 
-    <!-- PAGE 7: ACTIVITIES -->
-    <div class="page-card" id="page7">
+    <!-- PAGE 6: ACTIVITIES -->
+    <div class="page-card" id="page6">
       <h2>Birthday Activities 🎬</h2>
       <p class="subtitle">After eating, what should we do?</p>
 
       <div class="grid-options two-col">
         <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎬 Watch a Movie')"><span class="option-icon">🎬</span><span class="option-label">Watch a Movie</span></div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '📸 Take Photobooth Pictures')"><span class="option-icon">📸</span><span class="option-label">Photobooth / Pictures</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '📸 Photobooth')"><span class="option-icon">📸</span><span class="option-label">Photobooth / Pictures</span></div>
         <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🚶 Relaxing Walk')"><span class="option-icon">🚶</span><span class="option-label">Relaxing Walk</span></div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎤 Karaoke')"><span class="option-icon">🎤</span><span class="option-label">Karaoke</span></div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '🎨 Creative Workshop')"><span class="option-icon">🎨</span><span class="option-label">Creative / Crafting</span></div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '❤️ Just spend time together')"><span class="option-icon">❤️</span><span class="option-label">Just Spend Time Together</span></div>
+        <div class="option-card" onclick="toggleMultiSelect(this, 'activity', '❤️ Spend Time Together')"><span class="option-icon">❤️</span><span class="option-label">Spend Time Together</span></div>
       </div>
 
       <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(6)">Back</button>
-        <button class="btn btn-primary" onclick="goToPage(8)">Preferences 💗</button>
+        <button class="btn btn-secondary" onclick="goToPage(5)">Back</button>
+        <button class="btn btn-primary" onclick="goToPage(7)">Date Details 📅</button>
       </div>
     </div>
 
-    <!-- PAGE 8: IMPORTANT PREFERENCES -->
-    <div class="page-card" id="page8">
-      <h2>Help Me Plan 💗</h2>
-      <p class="subtitle">A few tiny details so I can make everything perfect for you.</p>
-
-      <div class="input-group">
-        <label class="input-label">Preferred Time of Day:</label>
-        <div class="grid-options three-col">
-          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Morning')"><span class="option-label">Morning ☀️</span></div>
-          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Afternoon')"><span class="option-label">Afternoon 🌤️</span></div>
-          <div class="option-card" onclick="setSingleSelect(this, 'timeOfDay', 'Evening')"><span class="option-label">Evening 🌙</span></div>
-        </div>
-      </div>
-
-      <div class="input-group">
-        <label class="input-label">Anything you DON'T want to do?</label>
-        <input type="text" placeholder="e.g. Too much walking, crowded places..." oninput="updateData('dontWant', this.value)">
-      </div>
-
-      <div class="input-group">
-        <label class="input-label">Anything you REALLY want to do?</label>
-        <input type="text" placeholder="e.g. Get a specific drink, take sunset photos..." oninput="updateData('reallyWant', this.value)">
-      </div>
-
-      <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(7)">Back</button>
-        <button class="btn btn-primary" onclick="goToPage(9)">Date Details 📅</button>
-      </div>
-    </div>
-
-    <!-- PAGE 9: DATE DETAILS -->
-    <div class="page-card" id="page9">
+    <!-- PAGE 7: DATE DETAILS (Replaced Meeting Place with Love Note) -->
+    <div class="page-card" id="page7">
       <h2>The Date Details 📅</h2>
       <p class="subtitle">Select your preferred date & time for our celebration.</p>
 
@@ -832,9 +750,11 @@
         <input type="time" id="timeInput" onchange="updateData('preferredTime', this.value)">
       </div>
 
-      <div class="input-group">
-        <label class="input-label">Meeting Place preference:</label>
-        <input type="text" placeholder="e.g. Pick me up at home / Meet at venue" oninput="updateData('meetingPlace', this.value)">
+      <!-- Short Love Note in Place of Meeting Place Field -->
+      <div class="love-note-box">
+        <p style="font-size: 0.88rem; color: var(--pink-deep); font-weight: 600;">
+          I'll pick you up, handle all the plans, and make sure everything is seamless. You just bring your sweet self! 💕
+        </p>
       </div>
 
       <div style="margin: 15px 0; text-align: center;">
@@ -850,13 +770,13 @@
       </div>
 
       <div class="button-group">
-        <button class="btn btn-secondary" onclick="goToPage(8)">Back</button>
+        <button class="btn btn-secondary" onclick="goToPage(6)">Back</button>
         <button class="btn btn-primary" onclick="submitForm()">Submit Wishes 💌</button>
       </div>
     </div>
 
-    <!-- PAGE 10: FINAL SURPRISE & INVITATION -->
-    <div class="page-card" id="page10">
+    <!-- PAGE 8: FINAL SURPRISE & INVITATION -->
+    <div class="page-card" id="page8">
       <h2>Plans Received! 💌</h2>
       <p class="subtitle">Your birthday preferences are officially in my hands.</p>
 
@@ -871,7 +791,7 @@
       </div>
 
       <div id="finalQuestionArea" style="display: none; text-align: center; margin-top: 20px; animation: fadeIn 0.5s ease forward;">
-        <h1 style="font-size: 2.2rem; color: var(--pink-deep); margin-bottom: 15px;">Will you go on a birthday date with me? ❤️</h1>
+        <h1 style="font-size: 2.2rem; color: var(--pink-deep); margin-bottom: 15px;">Will you go on a birthday date with me, Allie? ❤️</h1>
         
         <div class="button-group" style="flex-direction: column;">
           <button class="btn btn-primary" style="font-size: 1.1rem;" onclick="acceptDate('YES, LET\'S GO! 💕')">YES, LET'S GO! 💕</button>
@@ -880,35 +800,33 @@
       </div>
     </div>
 
-    <!-- PAGE 11: SUMMARY & TIMELINE -->
-    <div class="page-card" id="page11">
+    <!-- PAGE 9: SUMMARY & TIMELINE -->
+    <div class="page-card" id="page9">
       <h1>IT'S A DATE! ❤️</h1>
       <p class="subtitle">Happy Birthday, my love. I can't wait to make this day special for you.</p>
 
       <div style="background: var(--bg-cream); border-radius: 16px; padding: 18px; margin-bottom: 20px;">
-        <h3 style="color: var(--pink-deep); text-align: center; margin-bottom: 12px; font-family: 'Caveat', cursive; font-size: 1.6rem;">Your Birthday Wishlist 💗</h3>
-        <div id="summaryContent" style="font-size: 0.85rem; line-height: 1.8; color: var(--text-dark);">
-          <!-- Dynamically Populated -->
-        </div>
+        <h3 style="color: var(--pink-deep); text-align: center; margin-bottom: 12px; font-family: 'Caveat', cursive; font-size: 1.6rem;">Allie's Birthday Wishlist 💗</h3>
+        <div id="summaryContent" style="font-size: 0.85rem; line-height: 1.8; color: var(--text-dark);"></div>
       </div>
 
       <h3 style="color: var(--pink-deep); text-align: center; font-family: 'Caveat', cursive; font-size: 1.6rem; margin-bottom: 10px;">Proposed Birthday Timeline 🕒</h3>
       <div class="timeline">
         <div class="timeline-item">
-          <div class="timeline-title">Meet & Pick Up</div>
-          <div class="timeline-desc">Starting our special day with big smiles & birthday hugs</div>
+          <div class="timeline-title">Pick Up</div>
+          <div class="timeline-desc">Starting our special day together</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Main Birthday Feast</div>
-          <div class="timeline-desc">Enjoying your favorite dishes together</div>
+          <div class="timeline-desc">Enjoying your favorite dishes</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Fun & Activities</div>
-          <div class="timeline-desc">Doing whatever makes your heart happiest</div>
+          <div class="timeline-desc">Doing whatever makes you happiest</div>
         </div>
         <div class="timeline-item">
           <div class="timeline-title">Surprise & Dessert Time</div>
-          <div class="timeline-desc">Blowing out candles & special gifts</div>
+          <div class="timeline-desc">Candles & special gifts</div>
         </div>
       </div>
 
@@ -917,7 +835,6 @@
       </p>
     </div>
 
-    <!-- Footer -->
     <footer>
       Made especially for you with ❤️
       <br>
@@ -947,31 +864,25 @@
   </div>
 
   <script>
-    /* Global Application State */
-    const TOTAL_PAGES = 10;
+    const TOTAL_PAGES = 8;
     let currentPage = 1;
 
     let birthdayData = {
       destination: [],
       destinationNote: '',
-      mood: [],
       gifts: [],
       customGift: '',
       food: '',
       dessert: '',
+      specificFoods: '',
       activity: [],
-      timeOfDay: '',
-      dontWant: '',
-      reallyWant: '',
       preferredDate: '',
       preferredTime: '',
-      meetingPlace: '',
       readyChoice: 'YESSS! 🥰',
       acceptedInvitation: '',
       timestamp: null
     };
 
-    /* Background Heart Generation */
     function initHearts() {
       const container = document.getElementById('bgHearts');
       const heartIcons = ['❤️', '💖', '💕', '🌸', '✨'];
@@ -986,7 +897,6 @@
       }
     }
 
-    /* Audio Setup */
     const bgAudio = document.getElementById('bgAudio');
     const audioToggle = document.getElementById('audioToggle');
     let isPlaying = false;
@@ -1004,15 +914,13 @@
       isPlaying = !isPlaying;
     });
 
-    /* Countdown Timer (Set to 30 days from now by default, edit date as needed) */
     function initCountdown() {
       const targetDate = new Date();
-      targetDate.setDate(targetDate.getDate() + 14); // Default: 2 weeks out
+      targetDate.setDate(targetDate.getDate() + 27);
 
       function update() {
         const now = new Date();
         const diff = targetDate - now;
-
         if (diff <= 0) return;
 
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -1030,18 +938,13 @@
       setInterval(update, 1000);
     }
 
-    /* Navigation Controller */
     function goToPage(pageNum) {
-      // Hide all cards
       document.querySelectorAll('.page-card').forEach(card => card.classList.remove('active'));
-
-      // Show target card
       const targetCard = document.getElementById(`page${pageNum}`);
       if (targetCard) targetCard.classList.add('active');
 
       currentPage = pageNum;
 
-      // Progress bar UI
       const progressWrapper = document.getElementById('progressWrapper');
       if (pageNum > 1 && pageNum <= TOTAL_PAGES) {
         progressWrapper.style.display = 'block';
@@ -1055,12 +958,21 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Selection Logic */
+    function toggleDestinationRow(element, value) {
+      element.classList.toggle('selected');
+      if (!Array.isArray(birthdayData.destination)) birthdayData.destination = [];
+      const index = birthdayData.destination.indexOf(value);
+      if (index > -1) {
+        birthdayData.destination.splice(index, 1);
+      } else {
+        birthdayData.destination.push(value);
+      }
+      saveToLocalStorage();
+    }
+
     function toggleMultiSelect(element, key, value) {
       element.classList.toggle('selected');
-      if (!Array.isArray(birthdayData[key])) {
-        birthdayData[key] = [];
-      }
+      if (!Array.isArray(birthdayData[key])) birthdayData[key] = [];
       const index = birthdayData[key].indexOf(value);
       if (index > -1) {
         birthdayData[key].splice(index, 1);
@@ -1071,11 +983,9 @@
     }
 
     function setSingleSelect(element, key, value) {
-      // Unselect siblings
       const parent = element.parentElement;
       parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
       element.classList.add('selected');
-
       birthdayData[key] = value;
       saveToLocalStorage();
     }
@@ -1085,75 +995,53 @@
       saveToLocalStorage();
     }
 
-    /* LocalStorage Handler */
     function saveToLocalStorage() {
-      localStorage.setItem('birthday_wishlist_data', JSON.stringify(birthdayData));
+      localStorage.setItem('birthday_wishlist_data_allie', JSON.stringify(birthdayData));
     }
 
     function loadFromLocalStorage() {
-      const saved = localStorage.getItem('birthday_wishlist_data');
+      const saved = localStorage.getItem('birthday_wishlist_data_allie');
       if (saved) {
-        try {
-          birthdayData = JSON.parse(saved);
-        } catch (e) {
-          console.error("Could not load stored data", e);
-        }
+        try { birthdayData = JSON.parse(saved); } catch (e) {}
       }
     }
 
-    /* Form Submission & Final Steps */
     function submitForm() {
       birthdayData.timestamp = new Date().toLocaleString();
       saveToLocalStorage();
-      goToPage(10);
+      goToPage(8);
     }
 
     function revealFinalQuestion() {
       document.querySelector('.envelope').style.transform = 'scale(0.9)';
       document.querySelector('.envelope').style.opacity = '0.5';
       document.getElementById('finalQuestionArea').style.display = 'block';
-      
-      // Fire subtle confetti
-      confetti({
-        particleCount: 40,
-        spread: 60,
-        origin: { y: 0.7 }
-      });
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.7 } });
     }
 
     function acceptDate(choiceText) {
       birthdayData.acceptedInvitation = choiceText;
       saveToLocalStorage();
-
-      // Big Celebratory Confetti
-      confetti({
-        particleCount: 120,
-        spread: 100,
-        origin: { y: 0.6 }
-      });
-
+      confetti({ particleCount: 120, spread: 100, origin: { y: 0.6 } });
       renderSummary();
-      goToPage(11);
+      goToPage(9);
     }
 
-    /* Dynamic Summary Builder */
     function renderSummary() {
       const summaryBox = document.getElementById('summaryContent');
       summaryBox.innerHTML = `
         <p><strong>📍 Destination:</strong> ${birthdayData.destination.join(', ') || 'Surprise / Open'}</p>
-        <p><strong>🌟 Mood:</strong> ${birthdayData.mood.join(', ') || 'Not specified'}</p>
-        <p><strong>🍽️ Craving:</strong> ${birthdayData.food || 'Any'} | Dessert: ${birthdayData.dessert || 'Any'}</p>
+        <p><strong>🍽️ Main Cuisine:</strong> ${birthdayData.food || 'Any'} | <strong>Dessert:</strong> ${birthdayData.dessert || 'Any'}</p>
+        <p><strong>😋 Specific Cravings:</strong> ${birthdayData.specificFoods || 'None specified'}</p>
         <p><strong>🎁 Wishlist:</strong> ${birthdayData.gifts.join(', ') || 'Surprise'} ${birthdayData.customGift ? `(${birthdayData.customGift})` : ''}</p>
-        <p><strong>🎬 Activity:</strong> ${birthdayData.activity.join(', ') || 'Just spend time together'}</p>
+        <p><strong>🎬 Activity:</strong> ${birthdayData.activity.join(', ') || 'Spend time together'}</p>
         <p><strong>📅 Preferred Date:</strong> ${birthdayData.preferredDate || 'Flexible'} @ ${birthdayData.preferredTime || 'Flexible'}</p>
       `;
     }
 
-    /* Admin View & Export Utilities */
     function openAdminModal(e) {
       e.preventDefault();
       document.getElementById('adminModal').style.display = 'flex';
-      
       const adminDataArea = document.getElementById('adminDataArea');
       const jsonDisplay = document.getElementById('jsonDisplay');
 
@@ -1165,7 +1053,6 @@
             <p><strong>Submitted:</strong> ${birthdayData.timestamp}</p>
             <p><strong>Accepted:</strong> ${birthdayData.acceptedInvitation || 'Pending'}</p>
             <p><strong>Date Chosen:</strong> ${birthdayData.preferredDate} at ${birthdayData.preferredTime}</p>
-            <p><strong>Meeting Spot:</strong> ${birthdayData.meetingPlace || 'N/A'}</p>
           </div>
         `;
       }
@@ -1181,16 +1068,15 @@
 
       if (format === 'json') {
         dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(birthdayData, null, 2));
-        filename = "birthday_wishes.json";
+        filename = "allie_birthday_wishes.json";
       } else {
-        // CSV Format
         let csvContent = "Field,Value\n";
         for (let key in birthdayData) {
           let val = Array.isArray(birthdayData[key]) ? birthdayData[key].join("; ") : birthdayData[key];
           csvContent += `"${key}","${String(val).replace(/"/g, '""')}"\n`;
         }
         dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csvContent);
-        filename = "birthday_wishes.csv";
+        filename = "allie_birthday_wishes.csv";
       }
 
       const downloadAnchor = document.createElement('a');
@@ -1201,14 +1087,12 @@
       downloadAnchor.remove();
     }
 
-    /* Keyboard Shortcut for Admin Dashboard (Ctrl/Cmd + Shift + A) */
     document.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
         openAdminModal(e);
       }
     });
 
-    /* Initialization */
     window.addEventListener('DOMContentLoaded', () => {
       initHearts();
       initCountdown();
