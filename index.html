@@ -49,7 +49,6 @@
       position: relative;
     }
 
-    /* Floating Hearts Animation Background */
     .bg-hearts {
       position: fixed;
       top: 0;
@@ -185,7 +184,6 @@
       font-size: 1.5rem;
     }
 
-    /* 2x2 Memory Gallery Styling */
     .memory-gallery-2x2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -221,7 +219,7 @@
       font-weight: 500;
     }
 
-    /* Alternating Date Destinations Layout */
+    /* Step 2 Destination Layout */
     .destination-row {
       display: flex;
       align-items: center;
@@ -275,6 +273,94 @@
       color: var(--pink-deep);
       font-weight: bold;
       font-size: 14px;
+    }
+
+    /* Step 3 Custom Gift Styling */
+    .gift-section-block {
+      margin-bottom: 22px;
+    }
+
+    .gift-header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-cream);
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .gift-sub-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .visual-pick-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .visual-pick-grid.three-col {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .visual-pick-grid.four-col {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .visual-option-card {
+      border: 2px solid transparent;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg-cream);
+      cursor: pointer;
+      transition: var(--transition);
+      aspect-ratio: 1;
+    }
+
+    .visual-option-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .visual-option-card.selected {
+      border-color: var(--pink-accent);
+      box-shadow: 0 0 0 3px var(--pink-light);
+    }
+
+    .cln-banner-card {
+      background: #000000;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      display: block;
+      text-decoration: none;
+      transition: var(--transition);
+      margin-bottom: 8px;
+    }
+
+    .cln-banner-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .cln-logo-text {
+      color: var(--white);
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+
+    .cln-subtext {
+      color: #AAAAAA;
+      font-size: 0.75rem;
+      margin-top: 4px;
     }
 
     /* Option Grids & Cards */
@@ -344,7 +430,6 @@
       background: var(--white);
     }
 
-    /* Buttons */
     .button-group {
       display: flex;
       gap: 10px;
@@ -379,7 +464,6 @@
       border: 1px solid var(--pink-light);
     }
 
-    /* Countdown Styling */
     .countdown-box {
       background: var(--pink-light);
       border-radius: 16px;
@@ -528,7 +612,7 @@
 
   <div class="bg-hearts" id="bgHearts"></div>
 
-  <!-- Audio: The 1975 - About You (Catbox hosted MP3 link) -->
+  <!-- Audio: The 1975 - About You -->
   <audio id="bgAudio" loop preload="auto">
     <source src="https://files.catbox.moe/w204u7.mp3" type="audio/mpeg">
   </audio>
@@ -556,12 +640,11 @@
       <h1>Hey, Birthday Girl! ❤️</h1>
       <p class="subtitle">Your birthday is coming, and I have a little something special planned for you...</p>
       
-      <!-- Countdown Box (Set to 27 Days) -->
       <div class="countdown-box">
         <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Countdown to Your Birthday 🎂</div>
         <div class="countdown-digits" id="countdown">
-          <div class="digit-unit"><span class="num" id="d-days">27</span><span class="label">Days</span></div>
-          <div class="digit-unit"><span class="num" id="d-hours">00</span><span class="label">Hours</span></div>
+          <div class="digit-unit"><span class="num" id="d-days">25</span><span class="label">Days</span></div>
+          <div class="digit-unit"><span class="num" id="d-hours">07</span><span class="label">Hours</span></div>
           <div class="digit-unit"><span class="num" id="d-mins">00</span><span class="label">Mins</span></div>
           <div class="digit-unit"><span class="num" id="d-secs">00</span><span class="label">Secs</span></div>
         </div>
@@ -582,22 +665,21 @@
         You deserve a birthday filled with everything that brings you joy, and this time, I want to make it completely unforgettable.
       </p>
 
-      <!-- 2x2 Photo Grid -->
       <div class="memory-gallery-2x2">
         <div class="memory-item">
           <img src="photo1.jpg" alt="Allie 1">
           <div class="memory-caption">My Favorite ❤️</div>
         </div>
         <div class="memory-item">
-          <img src="photo2.jpeg" alt="Allie 2">
+          <img src="photo2.jpg" alt="Allie 2">
           <div class="memory-caption">Pretty Girl ✨</div>
         </div>
         <div class="memory-item">
-          <img src="photo3.jpeg" alt="Allie 3">
+          <img src="photo3.jpg" alt="Allie 3">
           <div class="memory-caption">Cutest Smile 💕</div>
         </div>
         <div class="memory-item">
-          <img src="photo4.jpeg" alt="Allie 4">
+          <img src="photo4.jpg" alt="Allie 4">
           <div class="memory-caption">Birthday Girl 👑</div>
         </div>
       </div>
@@ -608,13 +690,13 @@
       </div>
     </div>
 
-    <!-- PAGE 3: DESTINATION (Alternating Layout) -->
+    <!-- PAGE 3: DESTINATION (Single Choice 1 out of 2) -->
     <div class="page-card" id="page3">
       <h2>Where to Go? 📍</h2>
       <p class="subtitle">Where would you like to go for your birthday?</p>
 
       <!-- Option 1: Left Image, Right Checkbox -->
-      <div class="destination-row" onclick="toggleDestinationRow(this, 'Mall Date (Venice Grand Canal)')">
+      <div class="destination-row" id="dest-option-1" onclick="selectSingleDestination('dest-option-1', 'Mall Date (Venice Grand Canal)')">
         <img src="mall.jpg" class="destination-img" alt="Venice Canal">
         <div class="destination-check-wrap">
           <div class="custom-checkbox"></div>
@@ -623,7 +705,7 @@
       </div>
 
       <!-- Option 2: Left Checkbox, Right Image -->
-      <div class="destination-row" onclick="toggleDestinationRow(this, 'Rooftop Dinner Date')">
+      <div class="destination-row" id="dest-option-2" onclick="selectSingleDestination('dest-option-2', 'Rooftop Dinner Date')">
         <div class="destination-check-wrap">
           <span>Rooftop Dinner Date</span>
           <div class="custom-checkbox"></div>
@@ -642,29 +724,64 @@
       </div>
     </div>
 
-    <!-- PAGE 4: GIFTS -->
+    <!-- PAGE 4: GIFTS (Flowers + CLN Bag Catalog Hyperlink + Jewelry) -->
     <div class="page-card" id="page4">
       <h2>Gift Wishlist 🎁</h2>
       <p class="subtitle">If you could choose your birthday gift, what would make you smile?</p>
 
-      <div class="grid-options three-col">
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💐 Flowers')">
-          <span class="option-icon">💐</span><span class="option-label">Flowers</span>
+      <!-- 1. FLOWERS SECTION (Pick 1) -->
+      <div class="gift-section-block">
+        <div class="gift-header-badge">💐 Flowers</div>
+        <div class="gift-sub-label">Pick your preferred flower.</div>
+        
+        <div class="visual-pick-grid three-col" id="flowersGrid">
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Pink Bouquet')">
+            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&auto=format&fit=crop" alt="Pink Flowers">
+          </div>
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'White Bouquet')">
+            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300&auto=format&fit=crop" alt="White Flowers">
+          </div>
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Mixed Bouquet')">
+            <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=300&auto=format&fit=crop" alt="Mixed Flowers">
+          </div>
         </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '🧸 Stuffed Toy')">
-          <span class="option-icon">🧸</span><span class="option-label">Stuffed Toy</span>
+      </div>
+
+      <!-- 2. BAG SECTION (CLN Catalog Hyperlink) -->
+      <div class="gift-section-block">
+        <div class="gift-header-badge">👜 Bag</div>
+        <div class="gift-sub-label">Choose what bag you like.</div>
+
+        <!-- Hyperlink to CLN Bag Catalog -->
+        <a href="https://lawrencepagdanganan20-coder.github.io/bags-catalog/" target="_blank" class="cln-banner-card">
+          <div class="cln-logo-text">[CLN]</div>
+          <div class="cln-subtext">(Tap the logo to open catalog)</div>
+        </a>
+
+        <div class="input-group" style="margin-top: 8px;">
+          <label class="input-label">Tell me what you chose:</label>
+          <input type="text" placeholder="Name of the Bag | Color | i.e. Karrie [Gold]" oninput="updateData('chosenBag', this.value)">
         </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '💎 Jewelry')">
-          <span class="option-icon">💎</span><span class="option-label">Jewelry</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👗 Clothes')">
-          <span class="option-icon">👗</span><span class="option-label">Clothes</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👟 Shoes')">
-          <span class="option-icon">👟</span><span class="option-label">Shoes</span>
-        </div>
-        <div class="option-card" onclick="toggleMultiSelect(this, 'gifts', '👜 Bag')">
-          <span class="option-icon">👜</span><span class="option-label">Bag</span>
+      </div>
+
+      <!-- 3. JEWELRY SECTION (Pick 1) -->
+      <div class="gift-section-block">
+        <div class="gift-header-badge">💎 Jewelry</div>
+        <div class="gift-sub-label">Select your jewelry.</div>
+
+        <div class="visual-pick-grid four-col" id="jewelryGrid">
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Necklace')">
+            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&auto=format&fit=crop" alt="Necklace">
+          </div>
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Earrings')">
+            <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=300&auto=format&fit=crop" alt="Earrings">
+          </div>
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Bracelet')">
+            <img src="https://images.unsplash.com/photo-1611591475155-4284fa288e2d?w=300&auto=format&fit=crop" alt="Bracelet">
+          </div>
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Ring')">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&auto=format&fit=crop" alt="Ring">
+          </div>
         </div>
       </div>
 
@@ -679,7 +796,7 @@
       </div>
     </div>
 
-    <!-- PAGE 5: FOOD & DESSERT (With Food Wishlist Input) -->
+    <!-- PAGE 5: FOOD & DESSERT -->
     <div class="page-card" id="page5">
       <h2>Food & Dessert 😋</h2>
       <p class="subtitle">Of course, we can't forget the best part! What are you craving?</p>
@@ -705,7 +822,6 @@
         </div>
       </div>
 
-      <!-- Specific Food Listing Input Box -->
       <div class="input-group">
         <label class="input-label">Specific foods or dishes you're craving:</label>
         <input type="text" placeholder="e.g. Samgyupsal, Matcha Ice Cream, Ramen, Pasta..." oninput="updateData('specificFoods', this.value)">
@@ -735,7 +851,7 @@
       </div>
     </div>
 
-    <!-- PAGE 7: DATE DETAILS (Replaced Meeting Place with Love Note) -->
+    <!-- PAGE 7: DATE DETAILS -->
     <div class="page-card" id="page7">
       <h2>The Date Details 📅</h2>
       <p class="subtitle">Select your preferred date & time for our celebration.</p>
@@ -750,7 +866,6 @@
         <input type="time" id="timeInput" onchange="updateData('preferredTime', this.value)">
       </div>
 
-      <!-- Short Love Note in Place of Meeting Place Field -->
       <div class="love-note-box">
         <p style="font-size: 0.88rem; color: var(--pink-deep); font-weight: 600;">
           I'll pick you up, handle all the plans, and make sure everything is seamless. You just bring your sweet self! 💕
@@ -868,9 +983,11 @@
     let currentPage = 1;
 
     let birthdayData = {
-      destination: [],
+      destination: '',
       destinationNote: '',
-      gifts: [],
+      selectedFlower: '',
+      chosenBag: '',
+      selectedJewelry: '',
       customGift: '',
       food: '',
       dessert: '',
@@ -939,6 +1056,14 @@
     }
 
     function goToPage(pageNum) {
+      if (!isPlaying) {
+        bgAudio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('audioIcon').innerText = '🔊';
+          document.getElementById('audioText').innerText = 'Playing';
+        }).catch(err => console.log("Waiting for user tap"));
+      }
+
       document.querySelectorAll('.page-card').forEach(card => card.classList.remove('active'));
       const targetCard = document.getElementById(`page${pageNum}`);
       if (targetCard) targetCard.classList.add('active');
@@ -958,15 +1083,20 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function toggleDestinationRow(element, value) {
-      element.classList.toggle('selected');
-      if (!Array.isArray(birthdayData.destination)) birthdayData.destination = [];
-      const index = birthdayData.destination.indexOf(value);
-      if (index > -1) {
-        birthdayData.destination.splice(index, 1);
-      } else {
-        birthdayData.destination.push(value);
-      }
+    /* Single Destination Select (1 out of 2) */
+    function selectSingleDestination(elementId, value) {
+      document.querySelectorAll('#page3 .destination-row').forEach(row => row.classList.remove('selected'));
+      document.getElementById(elementId).classList.add('selected');
+      birthdayData.destination = value;
+      saveToLocalStorage();
+    }
+
+    /* Visual Grid Single Selection Handler */
+    function setVisualSingleSelect(element, key, value) {
+      const parent = element.parentElement;
+      parent.querySelectorAll('.visual-option-card').forEach(card => card.classList.remove('selected'));
+      element.classList.add('selected');
+      birthdayData[key] = value;
       saveToLocalStorage();
     }
 
@@ -1030,11 +1160,13 @@
     function renderSummary() {
       const summaryBox = document.getElementById('summaryContent');
       summaryBox.innerHTML = `
-        <p><strong>📍 Destination:</strong> ${birthdayData.destination.join(', ') || 'Surprise / Open'}</p>
+        <p><strong>📍 Destination:</strong> ${birthdayData.destination || 'Surprise / Open'}</p>
+        <p><strong>💐 Flowers:</strong> ${birthdayData.selectedFlower || 'None'}</p>
+        <p><strong>👜 Chosen Bag:</strong> ${birthdayData.chosenBag || 'None'}</p>
+        <p><strong>💎 Jewelry:</strong> ${birthdayData.selectedJewelry || 'None'}</p>
         <p><strong>🍽️ Main Cuisine:</strong> ${birthdayData.food || 'Any'} | <strong>Dessert:</strong> ${birthdayData.dessert || 'Any'}</p>
-        <p><strong>😋 Specific Cravings:</strong> ${birthdayData.specificFoods || 'None specified'}</p>
-        <p><strong>🎁 Wishlist:</strong> ${birthdayData.gifts.join(', ') || 'Surprise'} ${birthdayData.customGift ? `(${birthdayData.customGift})` : ''}</p>
-        <p><strong>🎬 Activity:</strong> ${birthdayData.activity.join(', ') || 'Spend time together'}</p>
+        <p><strong>😋 Cravings:</strong> ${birthdayData.specificFoods || 'None specified'}</p>
+        <p><strong>🎬 Activity:</strong> ${Array.isArray(birthdayData.activity) ? birthdayData.activity.join(', ') : 'Spend time together'}</p>
         <p><strong>📅 Preferred Date:</strong> ${birthdayData.preferredDate || 'Flexible'} @ ${birthdayData.preferredTime || 'Flexible'}</p>
       `;
     }
