@@ -219,7 +219,6 @@
       font-weight: 500;
     }
 
-    /* Step 2 Destination Layout */
     .destination-row {
       display: flex;
       align-items: center;
@@ -275,7 +274,6 @@
       font-size: 14px;
     }
 
-    /* Step 3 Custom Gift Styling */
     .gift-section-block {
       margin-bottom: 22px;
     }
@@ -363,7 +361,6 @@
       margin-top: 4px;
     }
 
-    /* Option Grids & Cards */
     .grid-options {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -399,7 +396,6 @@
     .option-icon { font-size: 1.6rem; }
     .option-label { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
 
-    /* Inputs & Form Elements */
     .input-group {
       margin-bottom: 18px;
       display: flex;
@@ -612,8 +608,8 @@
 
   <div class="bg-hearts" id="bgHearts"></div>
 
-  <!-- Audio: The 1975 - About You -->
-  <audio id="bgAudio" loop preload="auto">
+  <!-- Audio Element (Uses high-availability streaming MP3 source) -->
+  <audio id="bgAudio" loop preload="auto" crossorigin="anonymous">
     <source src="https://files.catbox.moe/w204u7.mp3" type="audio/mpeg">
   </audio>
 
@@ -640,6 +636,7 @@
       <h1>Hey, Birthday Girl! ❤️</h1>
       <p class="subtitle">Your birthday is coming, and I have a little something special planned for you...</p>
       
+      <!-- Countdown Box (Set to 25 Days and 7 Hours) -->
       <div class="countdown-box">
         <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">Countdown to Your Birthday 🎂</div>
         <div class="countdown-digits" id="countdown">
@@ -671,15 +668,15 @@
           <div class="memory-caption">My Favorite ❤️</div>
         </div>
         <div class="memory-item">
-          <img src="photo2.jpg" alt="Allie 2">
+          <img src="photo2.jpeg" alt="Allie 2">
           <div class="memory-caption">Pretty Girl ✨</div>
         </div>
         <div class="memory-item">
-          <img src="photo3.jpg" alt="Allie 3">
+          <img src="photo3.jpeg" alt="Allie 3">
           <div class="memory-caption">Cutest Smile 💕</div>
         </div>
         <div class="memory-item">
-          <img src="photo4.jpg" alt="Allie 4">
+          <img src="photo4.jpeg" alt="Allie 4">
           <div class="memory-caption">Birthday Girl 👑</div>
         </div>
       </div>
@@ -690,12 +687,11 @@
       </div>
     </div>
 
-    <!-- PAGE 3: DESTINATION (Single Choice 1 out of 2) -->
+    <!-- PAGE 3: DESTINATION -->
     <div class="page-card" id="page3">
       <h2>Where to Go? 📍</h2>
       <p class="subtitle">Where would you like to go for your birthday?</p>
 
-      <!-- Option 1: Left Image, Right Checkbox -->
       <div class="destination-row" id="dest-option-1" onclick="selectSingleDestination('dest-option-1', 'Mall Date (Venice Grand Canal)')">
         <img src="mall.jpg" class="destination-img" alt="Venice Canal">
         <div class="destination-check-wrap">
@@ -704,7 +700,6 @@
         </div>
       </div>
 
-      <!-- Option 2: Left Checkbox, Right Image -->
       <div class="destination-row" id="dest-option-2" onclick="selectSingleDestination('dest-option-2', 'Rooftop Dinner Date')">
         <div class="destination-check-wrap">
           <span>Rooftop Dinner Date</span>
@@ -724,35 +719,34 @@
       </div>
     </div>
 
-    <!-- PAGE 4: GIFTS (Flowers + CLN Bag Catalog Hyperlink + Jewelry) -->
+    <!-- PAGE 4: GIFTS (Custom Flowers & Jewelry Paths) -->
     <div class="page-card" id="page4">
       <h2>Gift Wishlist 🎁</h2>
       <p class="subtitle">If you could choose your birthday gift, what would make you smile?</p>
 
-      <!-- 1. FLOWERS SECTION (Pick 1) -->
+      <!-- 1. FLOWERS SECTION -->
       <div class="gift-section-block">
         <div class="gift-header-badge">💐 Flowers</div>
         <div class="gift-sub-label">Pick your preferred flower.</div>
         
         <div class="visual-pick-grid three-col" id="flowersGrid">
-          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Pink Bouquet')">
-            <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?w=300&auto=format&fit=crop" alt="Pink Flowers">
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Flower Option 1')">
+            <img src="flowers/flower1.png" alt="Flower 1">
           </div>
-          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'White Bouquet')">
-            <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=300&auto=format&fit=crop" alt="White Flowers">
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Flower Option 2')">
+            <img src="flowers/flower2.png" alt="Flower 2">
           </div>
-          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Mixed Bouquet')">
-            <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=300&auto=format&fit=crop" alt="Mixed Flowers">
+          <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedFlower', 'Flower Option 3')">
+            <img src="flowers/flower3.png" alt="Flower 3">
           </div>
         </div>
       </div>
 
-      <!-- 2. BAG SECTION (CLN Catalog Hyperlink) -->
+      <!-- 2. BAG SECTION -->
       <div class="gift-section-block">
         <div class="gift-header-badge">👜 Bag</div>
         <div class="gift-sub-label">Choose what bag you like.</div>
 
-        <!-- Hyperlink to CLN Bag Catalog -->
         <a href="https://lawrencepagdanganan20-coder.github.io/bags-catalog/" target="_blank" class="cln-banner-card">
           <div class="cln-logo-text">[CLN]</div>
           <div class="cln-subtext">(Tap the logo to open catalog)</div>
@@ -764,23 +758,23 @@
         </div>
       </div>
 
-      <!-- 3. JEWELRY SECTION (Pick 1) -->
+      <!-- 3. JEWELRY SECTION -->
       <div class="gift-section-block">
         <div class="gift-header-badge">💎 Jewelry</div>
         <div class="gift-sub-label">Select your jewelry.</div>
 
         <div class="visual-pick-grid four-col" id="jewelryGrid">
           <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Necklace')">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=300&auto=format&fit=crop" alt="Necklace">
+            <img src="jewelry/necklace.jpg" alt="Necklace">
           </div>
           <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Earrings')">
-            <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=300&auto=format&fit=crop" alt="Earrings">
+            <img src="jewelry/earrings.jpg" alt="Earrings">
           </div>
           <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Bracelet')">
-            <img src="https://images.unsplash.com/photo-1611591475155-4284fa288e2d?w=300&auto=format&fit=crop" alt="Bracelet">
+            <img src="jewelry/bracelet.avif" alt="Bracelet">
           </div>
           <div class="visual-option-card" onclick="setVisualSingleSelect(this, 'selectedJewelry', 'Ring')">
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=300&auto=format&fit=crop" alt="Ring">
+            <img src="jewelry/ring.jpg" alt="Ring">
           </div>
         </div>
       </div>
@@ -958,7 +952,6 @@
 
   </div>
 
-  <!-- ADMIN DASHBOARD MODAL -->
   <div class="modal" id="adminModal">
     <div class="modal-content">
       <h2 style="text-align: left; margin-bottom: 10px;">Admin Dashboard 📊</h2>
@@ -1014,26 +1007,45 @@
       }
     }
 
+    /* Robust Audio Playback Controller */
     const bgAudio = document.getElementById('bgAudio');
     const audioToggle = document.getElementById('audioToggle');
     let isPlaying = false;
 
-    audioToggle.addEventListener('click', () => {
+    function playAudio() {
+      if (!isPlaying) {
+        bgAudio.play().then(() => {
+          isPlaying = true;
+          document.getElementById('audioIcon').innerText = '🔊';
+          document.getElementById('audioText').innerText = 'Playing';
+        }).catch(() => {});
+      }
+    }
+
+    audioToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (isPlaying) {
         bgAudio.pause();
         document.getElementById('audioIcon').innerText = '🎵';
         document.getElementById('audioText').innerText = 'Music';
+        isPlaying = false;
       } else {
-        bgAudio.play().catch(() => {});
-        document.getElementById('audioIcon').innerText = '🔊';
-        document.getElementById('audioText').innerText = 'Playing';
+        playAudio();
       }
-      isPlaying = !isPlaying;
     });
 
+    /* Trigger audio play on any document click/tap */
+    document.addEventListener('click', () => {
+      if (!isPlaying) {
+        playAudio();
+      }
+    }, { once: false });
+
+    /* Countdown Timer (Target: Exactly 25 days and 7 hours from now) */
     function initCountdown() {
       const targetDate = new Date();
-      targetDate.setDate(targetDate.getDate() + 27);
+      targetDate.setDate(targetDate.getDate() + 25);
+      targetDate.setHours(targetDate.getHours() + 7);
 
       function update() {
         const now = new Date();
@@ -1056,13 +1068,7 @@
     }
 
     function goToPage(pageNum) {
-      if (!isPlaying) {
-        bgAudio.play().then(() => {
-          isPlaying = true;
-          document.getElementById('audioIcon').innerText = '🔊';
-          document.getElementById('audioText').innerText = 'Playing';
-        }).catch(err => console.log("Waiting for user tap"));
-      }
+      playAudio();
 
       document.querySelectorAll('.page-card').forEach(card => card.classList.remove('active'));
       const targetCard = document.getElementById(`page${pageNum}`);
@@ -1083,7 +1089,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /* Single Destination Select (1 out of 2) */
     function selectSingleDestination(elementId, value) {
       document.querySelectorAll('#page3 .destination-row').forEach(row => row.classList.remove('selected'));
       document.getElementById(elementId).classList.add('selected');
@@ -1091,7 +1096,6 @@
       saveToLocalStorage();
     }
 
-    /* Visual Grid Single Selection Handler */
     function setVisualSingleSelect(element, key, value) {
       const parent = element.parentElement;
       parent.querySelectorAll('.visual-option-card').forEach(card => card.classList.remove('selected'));
